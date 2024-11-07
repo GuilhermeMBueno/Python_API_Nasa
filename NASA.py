@@ -3,14 +3,13 @@ import pandas as pd
 import os
 from datetime import datetime, timedelta
 
-# Substitua 'SUA_CHAVE_DE_API_AQUI' pela sua chave de API da NASA
-api_key = 'sALemeISsJ3ahHDPK3VGEhpWslpA0DGrDcoP9DF7'
+# Substitua 'CHAVE_API' pela sua chave de API da NASA
+api_key = 'CHAVE_API'
 
 
 def obter_dados_api(url):
     # Fazendo a solicitação GET para a API
     response = requests.get(url)
-
     # Verificando se a solicitação foi bem-sucedida
     if response.status_code == 200:
         # Convertendo a resposta para formato JSON
@@ -18,16 +17,12 @@ def obter_dados_api(url):
         # Retornando os dados
         return data
     else:
-        print("Erro ao acessar a API")
+        print("Erro ao acessar a API, analise as conexões URL ou Token")
 
 # Função para gerar as datas de outubro de 2024
 def gerar_datas_outubro_2024():
-    # Definir a data inicial (1º de outubro de 2024)
     data_inicial = datetime(2024, 10, 1)
-    
-    # Definir a data final (31 de outubro de 2024)
     data_final = datetime(2024, 10, 31)
-    
     datas = []
     # Gerar as datas entre a data inicial e final
     while data_inicial <= data_final:
@@ -66,16 +61,13 @@ for data in datas_para_busca:
 
 # Criando o DataFrame a partir da lista de dicionários
 df = pd.DataFrame(photo_data)
-
 # Exibindo o DataFrame
 print(df)
 
 # Caminho do diretório "DataFrames" dentro do projeto atual
 diretorio = os.path.join(os.getcwd(), 'DataFrames')
-
 # Criar o diretório "DataFrames" se ele não existir
 os.makedirs(diretorio, exist_ok=True)
-
 # Salvar o DataFrame em formato CSV dentro da pasta "DataFrames"
 df.to_csv(os.path.join(diretorio, 'Perseverance.csv'), index=False)
 
